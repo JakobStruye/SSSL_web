@@ -1,0 +1,3 @@
+[submodule "SSSL"]
+	path = SSSL
+	url = https://github.com/JakobStruye/SSSL
