@@ -15,6 +15,16 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from app.models import User
+from app.ServerApp import ServerApp
+from app.ServerCallback import ServerCallback
+
+users = User.objects.all()
+
+server = ServerApp.get_server()
+server.add_payload_listener(ServerCallback)
+for user in users:
+    server.add_account(user.user_id, user.password)
 
 urlpatterns = [
     url(r'^app/', include('app.urls')),

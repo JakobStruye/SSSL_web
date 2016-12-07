@@ -1,0 +1,60 @@
+<form action="#" method="post">
+ <!--input type="text" value="8" name="mytextbox" size="1"/-->
+ <input type="submit" class="btn" value="Connect" name="connect" id="connect">
+</form>
+
+{% if has_error %}
+Connection failed!
+{% endif %}
+
+{% if has_connection %}
+<script>
+document.getElementById("connect").disabled = true;
+</script>
+{% endif %}
+
+
+<form action="#" method="post">
+ <!--input type="text" value="8" name="mytextbox" size="1"/-->
+ <input type="submit" class="btn" value="Disconnect" name="disconnect" id="disconnect">
+</form>
+
+{% if not has_connection %}
+<script>
+document.getElementById("disconnect").disabled = true;
+</script>
+{% endif %}
+
+<form action="#" method="post">
+ <input type="text" name="messagetext" />
+ <input type="submit" class="btn" value="Send message" name="message" id="message">
+</form>
+
+{% if not has_connection %}
+<script>
+document.getElementById("message").disabled = true;
+</script>
+{% endif %}
+
+
+{% if needs_ack %}
+{% if has_ack %}
+RECEIVED ACK
+{% endif %}
+{% if not has_ack %}
+DID NOT RECEIVE ACK
+{% endif %}
+
+{% endif %}
+
+<form action="#" method="post">
+ <!--input type="text" value="8" name="mytextbox" size="1"/-->
+ <input type="submit" class="btn" value="Show all" name="show" id="show">
+</form>
+
+{% if not has_connection %}
+<script>
+document.getElementById("show").disabled = true;
+</script>
+{% endif %}
+
