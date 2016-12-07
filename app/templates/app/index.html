@@ -58,3 +58,15 @@ document.getElementById("show").disabled = true;
 </script>
 {% endif %}
 
+
+{% if needs_show %}
+{% if has_show %}
+{{ show|linebreaksbr }}
+
+{% endif %}
+{% if not has_show %}
+DID NOT RECEIVE show
+{% endif %}
+
+{% endif %}
+

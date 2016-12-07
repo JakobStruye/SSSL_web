@@ -8,8 +8,10 @@ import time
 
 def index(request):
     ServerApp.get_server()
+    if not request.session.get('has_session'): #Force setting session key
+        request.session['has_session'] = True
     has_connection = (Clients.clients.get(request.session.session_key) is not None)
-
+    print "SESSKEY", request.session.session_key
     context = {'has_connection': has_connection}
     if not has_connection and request.POST.get('connect'):
         #mypythoncode.mypythonfunction( int(request.POST.get('mytextbox')) )
@@ -53,20 +55,22 @@ def index(request):
         context['has_ack'] = has_ack
 
     if has_connection and request.POST.get('show'):
-        print "show"
         # mypythoncode.mypythonfunction( int(request.POST.get('mytextbox')) )
+        Clients.show_ids[request.session.session_key] = None
         message = ServerCallback.create_show(conn)
         conn.send_payload(message)
-        context['needs_ack'] = True
-        has_ack = False
+        context['needs_show'] = True
+        has_show = False
         for i in range(100):
-            if Clients.acks.get(request.session.session_key) == message[1]:
-                has_ack = True
-                break
+            if Clients.show_ids.get(request.session.session_key) is not None: #First reply received
+                if Clients.show_lengths.get(request.session.session_key) == len(Clients.show_data.get(request.session.session_key)):
+                    has_show = True
+                    context['show'] = ""
+                    for message in Clients.show_data.get(request.session.session_key):
+                        context['show'] += "\n" + message
+                    break
+                print "needslen", Clients.show_lengths.get(request.session.session_key), "haslen", len(Clients.show_data.get(request.session.session_key))
             time.sleep(0.1)
-            print "sleep", message[1], Clients.acks.get(
-                request.session.session_key), request.session.session_key, len(Clients.acks), type(
-                request.session.session_key)
-        context['has_ack'] = has_ack
+        context['has_show'] = has_show
 
     return render(request,'app/index.html', context)

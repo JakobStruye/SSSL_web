@@ -2,10 +2,14 @@ from SSSL import util
 from app.models import *
 from django.utils import timezone
 from app.Clients import Clients
+import threading
 
 class ServerCallback:
 
     ids = dict()
+    show_reply_id = 0
+
+    callback_lock = threading.Lock()
     
     @staticmethod
     def callback(payload, user_id):
@@ -19,13 +23,28 @@ class ServerCallback:
             else:
                 return
 
+        if payload[0] == ord('\x03'):
+            messages = ServerCallback.parse_show(payload, user_id)
+            if messages:
+                return ServerCallback.create_show_reply(messages)
+            else:
+                return
+
     @staticmethod
     def callback_client(payload, client):
         if len(payload) < 1:
             print 'todo err'
             return
         if payload[0] == ord('\x04'):
-            message_id = ServerCallback.parse_ack(payload, client)
+            ServerCallback.parse_ack(payload, client)
+
+        print "RECEIVED REPLY"
+        if payload[0] == ord('\x05') or payload[0] == ord('\x06'):
+            ServerCallback.callback_lock.acquire()
+            print "haslock"
+            ServerCallback.parse_show_reply(payload, client)
+            ServerCallback.callback_lock.release()
+            print "releasedlock"
 
 
     @staticmethod
@@ -82,10 +101,9 @@ class ServerCallback:
         if not (payload[1] == ord('\xF0') and payload[2] == ord('\xF0')) :
             print 'todo err' #todo reset conn
             return
-        user_db = User.objects.get(user_id=user_id)
-        message_db = Message(user_id=user_db, date=timezone.now(), text=message)
-        message_db.save() #to database
-        return message_id
+        messages = Message.objects.all().order_by('-date') # - means desc
+
+        return messages
         
 
     @staticmethod
@@ -96,7 +114,33 @@ class ServerCallback:
 
         server_hello[1:2] = message_id
 
-        return server_hello
+        return [server_hello]
+
+    @staticmethod
+    def create_show_reply(messages):
+        payloads = []
+        show_reply_initial = bytearray((6) * '\x00', 'hex')
+        show_reply_initial[0] = '\x05' #show reply
+        reply_id = ServerCallback.show_reply_id
+        ServerCallback.show_reply_id += 1
+        ServerCallback.show_reply_id %=256
+        show_reply_initial[1:2] = util.int_to_binary(reply_id, 1)
+        show_reply_initial[2:4] = util.int_to_binary(len(messages), 2)
+        show_reply_initial[4:6] = '\xF0\xF0'
+        payloads.append(show_reply_initial)
+
+        for message in messages:
+            message_bytes = util.text_to_binary(message.text)
+            length = len(message_bytes)
+            show_reply_message = bytearray((6+length) * '\x00', 'hex')
+            show_reply_message[0] = '\x06'  # show reply message
+            show_reply_message[1:2] = util.int_to_binary(reply_id, 1)
+            show_reply_message[2:4] = util.int_to_binary(length, 2)
+            show_reply_message[4:4+length] = message_bytes
+            show_reply_message[4+length:6+length] = '\xF0\xF0'
+            payloads.append(show_reply_message)
+
+        return payloads
 
 
     @staticmethod
@@ -107,3 +151,23 @@ class ServerCallback:
         Clients.acks[Clients.client_to_session_key[client]] = message_id
 
 
+    @staticmethod
+    def parse_show_reply(payload, client):
+
+        session_key = Clients.client_to_session_key[client]
+        if payload[0] ==  ord('\x05'):  # show reply
+            Clients.show_ids[session_key] = util.binary_to_int(payload[1:2])
+            Clients.show_data[session_key] = []
+            Clients.show_lengths[session_key] = util.binary_to_int(payload[2:4])
+
+        elif payload[0] ==  ord('\x06'):  # show reply message
+            if Clients.show_ids.get(session_key) != util.binary_to_int(payload[1:2]):
+                #outdated, ignore
+                return
+
+            length = util.binary_to_int(payload[2:4])
+
+            message_bytes = payload[4:4 + length]
+
+            Clients.show_data.get(session_key).append(util.binary_to_text(message_bytes))
+            print "ADDED"
