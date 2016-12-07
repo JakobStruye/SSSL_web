@@ -5,6 +5,8 @@ from Clients import Clients
 from ServerApp import ServerApp
 from ServerCallback import ServerCallback
 import time
+from django import forms
+import base64
 
 def index(request):
     ServerApp.get_server()
@@ -66,11 +68,34 @@ def index(request):
                 if Clients.show_lengths.get(request.session.session_key) == len(Clients.show_data.get(request.session.session_key)):
                     has_show = True
                     context['show'] = ""
-                    for message in Clients.show_data.get(request.session.session_key):
-                        context['show'] += "\n" + message
+                    for entry in Clients.show_data.get(request.session.session_key):
+                        if entry[0] == 'text':
+                            context['show'] += "\nText: " + entry[1]
+                        elif entry[0] == 'image':
+                            context['show'] += "\nImage: " + "<img id=\"profileImage\" src=\"data:image/jpg;base64, " + base64.b64encode(entry[1])+ "\">"
+
+                    f = open('jipla', 'w')
+                    f.write(context['show'])
                     break
-                print "needslen", Clients.show_lengths.get(request.session.session_key), "haslen", len(Clients.show_data.get(request.session.session_key))
             time.sleep(0.1)
         context['has_show'] = has_show
 
+    if has_connection and request.POST.get('image'):
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            image_payload = ServerCallback.create_image(request.FILES['imagefile'], conn)
+            conn.send_payload(image_payload)
+        context['needs_ack_image'] = True
+        has_ack_image = False
+        for i in range(100):
+            if Clients.acks.get(request.session.session_key) == image_payload[1]:
+                has_ack_image = True
+                break
+            time.sleep(0.1)
+        context['has_ack_image'] = has_ack_image
+
     return render(request,'app/index.html', context)
+
+
+class UploadFileForm(forms.Form):
+    imagefile = forms.ImageField()

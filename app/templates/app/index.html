@@ -1,3 +1,5 @@
+<center>
+
 <form action="#" method="post">
  <!--input type="text" value="8" name="mytextbox" size="1"/-->
  <input type="submit" class="btn" value="Connect" name="connect" id="connect">
@@ -13,7 +15,7 @@ document.getElementById("connect").disabled = true;
 </script>
 {% endif %}
 
-
+<br>
 <form action="#" method="post">
  <!--input type="text" value="8" name="mytextbox" size="1"/-->
  <input type="submit" class="btn" value="Disconnect" name="disconnect" id="disconnect">
@@ -24,6 +26,8 @@ document.getElementById("connect").disabled = true;
 document.getElementById("disconnect").disabled = true;
 </script>
 {% endif %}
+
+<br>
 
 <form action="#" method="post">
  <input type="text" name="messagetext" />
@@ -37,16 +41,22 @@ document.getElementById("message").disabled = true;
 {% endif %}
 
 
-{% if needs_ack %}
-{% if has_ack %}
-RECEIVED ACK
-{% endif %}
-{% if not has_ack %}
-DID NOT RECEIVE ACK
+
+<br>
+<form enctype="multipart/form-data" action="#" method="post">
+<!--input type="hidden" name="MAX_FILE_SIZE" value="65000" /-->
+Choose a file to upload: <input name="imagefile" type="file" /><br />
+<br>
+ <input type="submit" class="btn" value="Upload image" name="image" id="image">
+</form>
+
+{% if not has_connection %}
+<script>
+document.getElementById("image").disabled = true;
+</script>
 {% endif %}
 
-{% endif %}
-
+<br>
 <form action="#" method="post">
  <!--input type="text" value="8" name="mytextbox" size="1"/-->
  <input type="submit" class="btn" value="Show all" name="show" id="show">
@@ -59,14 +69,38 @@ document.getElementById("show").disabled = true;
 {% endif %}
 
 
+{% if needs_ack %}
+{% if has_ack %}
+The message was uploaded successfully!
+{% endif %}
+{% if not has_ack %}
+Message upload failed!
+{% endif %}
+{% endif %}
+
+
+{% if needs_ack_image %}
+{% if has_ack_image %}
+The image was uploaded successfully!
+{% endif %}
+{% if not has_ack_image %}
+Image upload failed!
+{% endif %}
+{% endif %}
+
+
+
 {% if needs_show %}
 {% if has_show %}
+{% autoescape off %}
 {{ show|linebreaksbr }}
+{% endautoescape %}
 
 {% endif %}
 {% if not has_show %}
-DID NOT RECEIVE show
+Could not retrieve all data!
 {% endif %}
 
 {% endif %}
 
+</center>
