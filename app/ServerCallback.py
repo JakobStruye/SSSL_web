@@ -46,20 +46,17 @@ class ServerCallback:
         if payload[0] == ord('\x04'):
             ServerCallback.parse_ack(payload, client)
 
-        print "RECEIVED REPLY"
         if payload[0] == ord('\x05') or payload[0] == ord('\x06') or payload[0] == ord('\x07'):
             ServerCallback.callback_lock.acquire()
-            print "haslock"
             ServerCallback.parse_show_reply(payload, client)
             ServerCallback.callback_lock.release()
-            print "releasedlock"
 
 
     @staticmethod
     def create_message(message, conn):
         length = len(message)
-        server_hello = bytearray((6+length) * '\x00', 'hex')
-        server_hello[0] = '\x01' #message
+        packet = bytearray((6+length) * '\x00', 'hex')
+        packet[0] = '\x01' #message
 
         message_id = ServerCallback.ids.get(conn)
         if not message_id:
@@ -69,15 +66,15 @@ class ServerCallback:
             message_id %= 256
         ServerCallback.ids[conn] = message_id
 
-        server_hello[1:2] = util.int_to_binary(message_id, 1)
+        packet[1:2] = util.int_to_binary(message_id, 1)
 
         message_binary = util.text_to_binary(message)
 
-        server_hello[2:4] = util.int_to_binary(length, 2)
-        server_hello[4:4+length] = message_binary
+        packet[2:4] = util.int_to_binary(length, 2)
+        packet[4:4+length] = message_binary
 
-        server_hello[4+length:6+length] = '\xF0\xF0'
-        return server_hello
+        packet[4+length:6+length] = '\xF0\xF0'
+        return packet
 
     @staticmethod
     def create_show( conn):
@@ -236,6 +233,7 @@ class ServerCallback:
         show_reply_message[2:4] = util.int_to_binary(length, 2)
         show_reply_message[4:4 + length] = message_bytes
         show_reply_message[4 + length:6 + length] = '\xF0\xF0'
+        #print "CREATED MESSAGE PAYLOAD", length, len(show_reply_message)
         return show_reply_message
 
 
@@ -258,7 +256,7 @@ class ServerCallback:
     def parse_ack(payload, client):
 
         message_id = util.binary_to_int(payload[1:2])
-        print "PARSING ACK", message_id, Clients.client_to_session_key[client]
+        #print "PARSING ACK", message_id, Clients.client_to_session_key[client]
         Clients.acks[Clients.client_to_session_key[client]] = message_id
 
 
@@ -281,7 +279,7 @@ class ServerCallback:
             message_bytes = payload[4:4 + length]
 
             Clients.show_data.get(session_key).append(['text', util.binary_to_text(message_bytes)])
-            print "ADDED"
+            #print "ADDED"
 
         elif payload[0] == ord('\x07'):  # show reply image
             if Clients.show_ids.get(session_key) != util.binary_to_int(payload[1:2]):
@@ -293,4 +291,4 @@ class ServerCallback:
             image_bytes = payload[4:4 + length]
 
             Clients.show_data.get(session_key).append(['image', util.binary_to_text(image_bytes)])
-            print "ADDED"
+            #print "ADDED"

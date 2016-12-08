@@ -65,6 +65,7 @@ def index(request):
         has_show = False
         for i in range(100):
             if Clients.show_ids.get(request.session.session_key) is not None: #First reply received
+                print "GOT", len(Clients.show_data.get(request.session.session_key)), "OF", Clients.show_lengths.get(request.session.session_key)
                 if Clients.show_lengths.get(request.session.session_key) == len(Clients.show_data.get(request.session.session_key)):
                     has_show = True
                     context['show'] = ""
@@ -74,8 +75,6 @@ def index(request):
                         elif entry[0] == 'image':
                             context['show'] += "\nImage: " + "<img id=\"profileImage\" src=\"data:image/jpg;base64, " + base64.b64encode(entry[1])+ "\">"
 
-                    f = open('jipla', 'w')
-                    f.write(context['show'])
                     break
             time.sleep(0.1)
         context['has_show'] = has_show
