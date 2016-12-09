@@ -103,4 +103,14 @@ Could not retrieve all data!
 
 {% endif %}
 
+{% if connection_lost %}
+Connection was closed!
+<script>
+document.getElementById("connect").disabled = true;
+document.getElementById("disconnect").disabled = true;
+document.getElementById("message").disabled = true;
+document.getElementById("image").disabled = true;
+document.getElementById("show").disabled = true;
+</script>
+{% endif %}
 </center>

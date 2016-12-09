@@ -1,3 +1,4 @@
+# These are variables accessible from anywhere
 class Clients:
     clients = dict()
 

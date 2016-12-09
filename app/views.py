@@ -3,7 +3,7 @@ from django.shortcuts import render
 from SSSL.client import Client
 from Clients import Clients
 from ServerApp import ServerApp
-from ServerCallback import ServerCallback
+from ClientCallback import ClientCallback
 import time
 from django import forms
 import base64
@@ -18,7 +18,7 @@ def index(request):
     if not has_connection and request.POST.get('connect'):
         #mypythoncode.mypythonfunction( int(request.POST.get('mytextbox')) )
         client = Client('client-05.pem', 'project-client', 'Konklave123')
-        client.add_payload_listener(ServerCallback)
+        client.add_payload_listener(ClientCallback)
         error = client.connect('localhost', 8970)
 
         if error == 0:
@@ -44,8 +44,12 @@ def index(request):
     if has_connection and request.POST.get('message'):
         print "message"
         #mypythoncode.mypythonfunction( int(request.POST.get('mytextbox')) )
-        message = ServerCallback.create_message(request.POST.get('messagetext'), conn)
-        conn.send_payload(message)
+        message = ClientCallback.create_message(request.POST.get('messagetext'), conn)
+        try:
+            conn.send_payload(message)
+        except:
+            context['connection_lost'] = True
+        print "SENT"
         context['needs_ack'] = True
         has_ack = False
         for i in range(100):
@@ -53,19 +57,20 @@ def index(request):
                 has_ack = True
                 break
             time.sleep(0.1)
-            print "sleep", message[1], Clients.acks.get(request.session.session_key), request.session.session_key, len(Clients.acks), type(request.session.session_key)
         context['has_ack'] = has_ack
 
     if has_connection and request.POST.get('show'):
         # mypythoncode.mypythonfunction( int(request.POST.get('mytextbox')) )
         Clients.show_ids[request.session.session_key] = None
-        message = ServerCallback.create_show(conn)
-        conn.send_payload(message)
+        message = ClientCallback.create_show(conn)
+        try:
+            conn.send_payload(message)
+        except:
+            context['connection_lost'] = True
         context['needs_show'] = True
         has_show = False
         for i in range(100):
             if Clients.show_ids.get(request.session.session_key) is not None: #First reply received
-                print "GOT", len(Clients.show_data.get(request.session.session_key)), "OF", Clients.show_lengths.get(request.session.session_key)
                 if Clients.show_lengths.get(request.session.session_key) == len(Clients.show_data.get(request.session.session_key)):
                     has_show = True
                     context['show'] = ""
@@ -82,9 +87,12 @@ def index(request):
     if has_connection and request.POST.get('image'):
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
-            image_payload = ServerCallback.create_image(request.FILES['imagefile'], conn)
-            conn.send_payload(image_payload)
-        context['needs_ack_image'] = True
+            image_payload = ClientCallback.create_image(request.FILES['imagefile'], conn)
+            try:
+                conn.send_payload(image_payload)
+            except:
+                context['connection_lost'] = True
+            context['needs_ack_image'] = True
         has_ack_image = False
         for i in range(100):
             if Clients.acks.get(request.session.session_key) == image_payload[1]:
