@@ -46,7 +46,7 @@ def index(request):
     if has_connection and request.POST.get('message'):
         # User clicked message button, send to server
         print "User input: send message"
-        if request.POST.get('messagetext') is None:
+        if request.POST.get('messagetext') == "":
             return render(request, 'app/index.html', context)  # Nothing filled in, ignore
 
         message = ClientCallback.create_message(request.POST.get('messagetext'), conn)
@@ -103,13 +103,13 @@ def index(request):
         if form.is_valid():
             # Binary representation of image
             image_payload = ClientCallback.create_image(request.FILES['imagefile'], conn)
-            if image_payload is None:
-                return render(request, 'app/index.html', context) # Nothing supplied, ignore
             try:
                 conn.send_payload(image_payload)
             except:
                 context['connection_lost'] = True
             context['needs_ack_image'] = True
+        else:
+            return render(request, 'app/index.html', context)  # Nothing supplied, ignore
         has_ack_image = False
         # Again allow up to 10 seconds for ack
         for i in range(100):
