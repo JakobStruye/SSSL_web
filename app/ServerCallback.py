@@ -15,12 +15,12 @@ class ServerCallback:
     @staticmethod
     def callback(payload, user_id):
         if len(payload) < 1:
-            print 'todo err'
+            print 'todo err 1'
             return
         if payload[0] == ord('\x01'):
-            image_id = ServerCallback.parse_message(payload, user_id)
-            if image_id:
-                return ServerCallback.create_ack(image_id)
+            message_id = ServerCallback.parse_message(payload, user_id)
+            if message_id:
+                return ServerCallback.create_ack(message_id)
             else:
                 return
 
@@ -55,7 +55,7 @@ class ServerCallback:
     @staticmethod
     def create_message(message, conn):
         length = len(message)
-        packet = bytearray((6+length) * '\x00', 'hex')
+        packet = bytearray((8+length) * '\x00', 'hex')
         packet[0] = '\x01' #message
 
         message_id = ServerCallback.ids.get(conn)
@@ -70,10 +70,10 @@ class ServerCallback:
 
         message_binary = util.text_to_binary(message)
 
-        packet[2:4] = util.int_to_binary(length, 2)
-        packet[4:4+length] = message_binary
+        packet[2:6] = util.int_to_binary(length, 4)
+        packet[6:6+length] = message_binary
 
-        packet[4+length:6+length] = '\xF0\xF0'
+        packet[6+length:8+length] = '\xF0\xF0'
         return packet
 
     @staticmethod
@@ -93,7 +93,7 @@ class ServerCallback:
         image_contents = image.read()
         image_binary = util.text_to_binary(image_contents)
         length = len(image_binary)
-        client_image = bytearray((7+length+name_length) * '\x00', 'hex')
+        client_image = bytearray((9+length+name_length) * '\x00', 'hex')
         client_image[0] = '\x02' #image
 
         image_id = ServerCallback.ids.get(conn)
@@ -109,10 +109,10 @@ class ServerCallback:
         client_image[2:3] = util.int_to_binary(name_length, 1)
         client_image[3:3+name_length] = name_binary
 
-        client_image[3+name_length:5+name_length] = util.int_to_binary(length, 2)
-        client_image[5+name_length:5+name_length+length] = image_binary
+        client_image[3+name_length:7+name_length] = util.int_to_binary(length, 4)
+        client_image[7+name_length:7+name_length+length] = image_binary
 
-        client_image[5+name_length+length:7+name_length+length] = '\xF0\xF0'
+        client_image[7+name_length+length:9+name_length+length] = '\xF0\xF0'
         return client_image
 
 
@@ -120,12 +120,12 @@ class ServerCallback:
     @staticmethod
     def parse_message(payload, user_id):
         message_id = payload[1:2]
-        length = util.binary_to_int(payload[2:4])
-        message = util.binary_to_text(payload[4:4+length])
+        length = util.binary_to_int(payload[2:6])
+        message = util.binary_to_text(payload[6:6+length])
         print "Server received", message
 
-        if not (payload[4+length] == ord('\xF0') and payload[5+length] == ord('\xF0')) :
-            print 'todo err' #todo reset conn
+        if not (payload[6+length] == ord('\xF0') and payload[7+length] == ord('\xF0')):
+            print 'todo err 2'
             return
         user_db = User.objects.get(user_id=user_id)
         message_db = Message(user_id=user_db, date=timezone.now(), text=message)
@@ -136,20 +136,19 @@ class ServerCallback:
     @staticmethod
     def parse_image(payload, user_id):
 
-
         image_id = payload[1:2]
 
         name_length = util.binary_to_int(payload[2:3])
         name = util.binary_to_text(payload[3:3+name_length])
-        length = util.binary_to_int(payload[3+name_length:5+name_length])
-        image = util.binary_to_text(payload[5+name_length:5+name_length+length])
+        length = util.binary_to_int(payload[3+name_length:7+name_length])
+        image = util.binary_to_text(payload[7+name_length:7+name_length+length])
 
         newFile = open("images/"+name, "wb")
 
         newFile.write(image)
 
-        if not (payload[5+name_length+length] == ord('\xF0') and payload[6+name_length+length] == ord('\xF0')) :
-            print 'todo err' #todo reset conn
+        if not (payload[7+name_length+length] == ord('\xF0') and payload[8+name_length+length] == ord('\xF0')) :
+            print 'todo err 3'
             return
 
         user_db = User.objects.get(user_id=user_id)
@@ -160,7 +159,7 @@ class ServerCallback:
     @staticmethod
     def parse_show(payload, user_id):
         if not (payload[1] == ord('\xF0') and payload[2] == ord('\xF0')) :
-            print 'todo err' #todo reset conn
+            print 'todo err 4'
             return
         messages = Message.objects.all().order_by('-date') # - means desc
         images = Image.objects.all().order_by('-date') # - means desc
@@ -227,12 +226,12 @@ class ServerCallback:
     def create_show_reply_message(message, reply_id):
         message_bytes = util.text_to_binary(message.text)
         length = len(message_bytes)
-        show_reply_message = bytearray((6 + length) * '\x00', 'hex')
+        show_reply_message = bytearray((8 + length) * '\x00', 'hex')
         show_reply_message[0] = '\x06'  # show reply message
         show_reply_message[1:2] = util.int_to_binary(reply_id, 1)
-        show_reply_message[2:4] = util.int_to_binary(length, 2)
-        show_reply_message[4:4 + length] = message_bytes
-        show_reply_message[4 + length:6 + length] = '\xF0\xF0'
+        show_reply_message[2:6] = util.int_to_binary(length, 4)
+        show_reply_message[6:6 + length] = message_bytes
+        show_reply_message[6 + length:8 + length] = '\xF0\xF0'
         #print "CREATED MESSAGE PAYLOAD", length, len(show_reply_message)
         return show_reply_message
 
@@ -243,12 +242,12 @@ class ServerCallback:
 
         image_bytes = util.text_to_binary(newFile.read())
         length = len(image_bytes)
-        show_reply_image = bytearray((6 + length) * '\x00', 'hex')
+        show_reply_image = bytearray((8 + length) * '\x00', 'hex')
         show_reply_image[0] = '\x07'  # show reply image
         show_reply_image[1:2] = util.int_to_binary(reply_id, 1)
-        show_reply_image[2:4] = util.int_to_binary(length, 2)
-        show_reply_image[4:4 + length] = image_bytes
-        show_reply_image[4 + length:6 + length] = '\xF0\xF0'
+        show_reply_image[2:6] = util.int_to_binary(length, 4)
+        show_reply_image[6:6 + length] = image_bytes
+        show_reply_image[6 + length:8 + length] = '\xF0\xF0'
         return show_reply_image
 
 
@@ -274,9 +273,9 @@ class ServerCallback:
                 #outdated, ignore
                 return
 
-            length = util.binary_to_int(payload[2:4])
+            length = util.binary_to_int(payload[2:6])
 
-            message_bytes = payload[4:4 + length]
+            message_bytes = payload[6:6 + length]
 
             Clients.show_data.get(session_key).append(['text', util.binary_to_text(message_bytes)])
             #print "ADDED"
@@ -286,9 +285,9 @@ class ServerCallback:
                 # outdated, ignore
                 return
 
-            length = util.binary_to_int(payload[2:4])
+            length = util.binary_to_int(payload[2:6])
 
-            image_bytes = payload[4:4 + length]
+            image_bytes = payload[6:6 + length]
 
             Clients.show_data.get(session_key).append(['image', util.binary_to_text(image_bytes)])
             #print "ADDED"

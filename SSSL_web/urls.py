@@ -22,7 +22,7 @@ from app.ServerCallback import ServerCallback
 users = User.objects.all()
 
 server = ServerApp.get_server()
-server.add_payload_listener(ServerCallback)
+server.set_payload_listener(ServerCallback)
 for user in users:
     server.add_account(user.user_id, user.password)
 
