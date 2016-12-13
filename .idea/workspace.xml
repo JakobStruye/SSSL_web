@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="11de8c37-d8b9-4ee8-b6df-e4e1708126ed" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views.py" afterPath="$PROJECT_DIR$/app/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="SSSL_web.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,41 +30,25 @@
       <file leaf-file-name="ServerCallback.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/ServerCallback.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2609">
-              <caret line="145" column="56" selection-start-line="145" selection-start-column="56" selection-end-line="145" selection-end-column="56" />
-              <folding>
-                <element signature="e#0#21#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="2196">
+              <caret line="124" column="0" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="client.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SSSL/client.py">
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="27" column="35" selection-start-line="27" selection-start-column="35" selection-end-line="27" selection-end-column="35" />
-              <folding>
-                <element signature="e#0#13#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="216">
+              <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ClientCallback.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/ClientCallback.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="526">
-              <caret line="36" column="22" selection-start-line="36" selection-start-column="8" selection-end-line="36" selection-end-column="22" />
-              <folding>
-                <element signature="e#0#21#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tests.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/tests.py">
+      <file leaf-file-name="Clients.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Clients.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="54">
               <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
@@ -72,20 +57,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="server.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SSSL/server.py">
+      <file leaf-file-name="ClientCallback.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/ClientCallback.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="737">
-              <caret line="473" column="40" selection-start-line="473" selection-start-column="40" selection-end-line="473" selection-end-column="40" />
+            <state relative-caret-position="630">
+              <caret line="36" column="22" selection-start-line="36" selection-start-column="8" selection-end-line="36" selection-end-column="22" />
               <folding>
-                <element signature="e#0#13#0" expanded="true" />
+                <element signature="e#0#21#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/urls.py">
+      <file leaf-file-name="apps.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/apps.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -94,24 +79,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ServerApp.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/ServerApp.py">
+      <file leaf-file-name="client.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/SSSL/client.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
-              <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+            <state relative-caret-position="76">
+              <caret line="366" column="63" selection-start-line="366" selection-start-column="63" selection-end-line="366" selection-end-column="63" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/views.py">
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SSSL_web/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="485">
-              <caret line="104" column="89" selection-start-line="104" selection-start-column="89" selection-end-line="104" selection-end-column="89" />
-              <folding>
-                <element signature="e#0#36#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="198">
+              <caret line="11" column="25" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -126,12 +109,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="server_prvkey.key" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/server_prvkey.key">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="274">
+              <caret line="29" column="45" selection-start-line="29" selection-start-column="45" selection-end-line="29" selection-end-column="45" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="server.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SSSL/server.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-6998">
+              <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -144,7 +139,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/SSSL_web/urls.py" />
         <option value="$PROJECT_DIR$/../SSSL/util.py" />
         <option value="$PROJECT_DIR$/../SSSL/client.py" />
         <option value="$PROJECT_DIR$/app/models.py" />
@@ -156,6 +150,7 @@
         <option value="$PROJECT_DIR$/SSSL/client.py" />
         <option value="$PROJECT_DIR$/app/ClientCallback.py" />
         <option value="$PROJECT_DIR$/app/views.py" />
+        <option value="$PROJECT_DIR$/SSSL_web/urls.py" />
       </list>
     </option>
   </component>
@@ -279,8 +274,8 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -624,9 +619,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1440">
           <caret line="88" column="0" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -644,9 +637,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1440">
           <caret line="84" column="4" selection-start-line="84" selection-start-column="4" selection-end-line="84" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -661,7 +651,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="14" column="36" selection-start-line="14" selection-start-column="36" selection-end-line="14" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -669,9 +658,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1692">
           <caret line="94" column="0" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#36#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -687,9 +674,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1782">
           <caret line="103" column="73" selection-start-line="103" selection-start-column="73" selection-end-line="103" selection-end-column="73" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -698,9 +683,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4770">
           <caret line="273" column="0" selection-start-line="273" selection-start-column="0" selection-end-line="273" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -725,9 +708,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#36#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -742,7 +723,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="14" column="36" selection-start-line="14" selection-start-column="36" selection-end-line="14" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -758,9 +738,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2790">
           <caret line="159" column="0" selection-start-line="159" selection-start-column="0" selection-end-line="159" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -785,9 +763,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
           <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#36#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -802,7 +778,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="14" column="36" selection-start-line="14" selection-start-column="36" selection-end-line="14" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -818,7 +793,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="14" column="36" selection-start-line="14" selection-start-column="36" selection-end-line="14" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -834,7 +808,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -853,21 +826,8 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/SSSL/server-04.pem" />
-    <entry file="file:///usr/local/lib/python2.7/dist-packages/django/forms/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2628">
-          <caret line="163" column="8" selection-start-line="163" selection-start-column="8" selection-end-line="163" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/lib/python2.7/dist-packages/django/core/files/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file:///usr/local/lib/python2.7/dist-packages/django/forms/forms.py" />
+    <entry file="file:///usr/local/lib/python2.7/dist-packages/django/core/files/base.py" />
     <entry file="file://$PROJECT_DIR$/../SSSL/util.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1242">
@@ -890,46 +850,61 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/server_prvkey.key">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/ServerApp.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/SSSL/util.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1944">
-          <caret line="112" column="58" selection-start-line="112" selection-start-column="58" selection-end-line="112" selection-end-column="58" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="1290">
+          <caret line="90" column="4" selection-start-line="90" selection-start-column="4" selection-end-line="90" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/SSSL_web/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="10" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="10" />
+        <state relative-caret-position="198">
+          <caret line="11" column="25" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/apps.py">
+    <entry file="file://$PROJECT_DIR$/app/ServerCallback.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Clients.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        <state relative-caret-position="2196">
+          <caret line="124" column="0" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -942,23 +917,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/server_prvkey.key">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/ServerApp.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/tests.py">
+    <entry file="file://$PROJECT_DIR$/app/Clients.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="54">
           <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
@@ -966,7 +925,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/urls.py">
+    <entry file="file://$PROJECT_DIR$/app/ClientCallback.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="36" column="22" selection-start-line="36" selection-start-column="8" selection-end-line="36" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/apps.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -982,53 +951,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SSSL/server.py">
+    <entry file="file://$PROJECT_DIR$/app/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="737">
-          <caret line="473" column="40" selection-start-line="473" selection-start-column="40" selection-end-line="473" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="274">
+          <caret line="29" column="45" selection-start-line="29" selection-start-column="45" selection-end-line="29" selection-end-column="45" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/ServerCallback.py">
+    <entry file="file://$PROJECT_DIR$/SSSL/server.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2609">
-          <caret line="145" column="56" selection-start-line="145" selection-start-column="56" selection-end-line="145" selection-end-column="56" />
+        <state relative-caret-position="-6998">
+          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
           <folding>
-            <element signature="e#0#21#0" expanded="true" />
+            <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/SSSL/client.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="27" column="35" selection-start-line="27" selection-start-column="35" selection-end-line="27" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/ClientCallback.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="526">
-          <caret line="36" column="22" selection-start-line="36" selection-start-column="8" selection-end-line="36" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="485">
-          <caret line="104" column="89" selection-start-line="104" selection-start-column="89" selection-end-line="104" selection-end-column="89" />
-          <folding>
-            <element signature="e#0#36#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="76">
+          <caret line="366" column="63" selection-start-line="366" selection-start-column="63" selection-end-line="366" selection-end-column="63" />
+          <folding />
         </state>
       </provider>
     </entry>
